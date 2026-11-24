@@ -14,16 +14,10 @@
       --muted: #94a3b8;
       --accent: #38bdf8;
       --accent-2: #818cf8;
-      --success: #34d399;
-      --danger: #f87171;
       --radius: 14px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -38,12 +32,7 @@
       flex-direction: column;
     }
 
-    .container {
-      width: 100%;
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+    .container { width: 100%; max-width: 920px; margin: 0 auto; padding: 0 20px; }
 
     header {
       border-bottom: 1px solid var(--border);
@@ -54,375 +43,112 @@
       z-index: 10;
     }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      gap: 12px;
-    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 12px; }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: -0.02em;
-    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; }
 
     .brand-badge {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #06101d;
-      font-weight: 800;
-      font-size: 0.95rem;
+      width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #06101d; font-weight: 800;
     }
 
     .pill {
-      font-size: 0.78rem;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--surface);
-      white-space: nowrap;
+      font-size: 0.78rem; color: var(--muted); border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 999px; background: var(--surface); white-space: nowrap;
     }
 
-    main {
-      flex: 1;
-      padding: 36px 0 56px;
-    }
+    main { flex: 1; padding: 36px 0 56px; }
 
-    .hero {
-      text-align: center;
-      margin-bottom: 26px;
-    }
-
-    .hero h1 {
-      font-size: clamp(1.65rem, 4vw, 2.35rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 10px;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      color: var(--muted);
-      max-width: 620px;
-      margin: 0 auto;
-      font-size: 0.95rem;
-    }
+    .hero { text-align: center; margin-bottom: 26px; }
+    .hero h1 { font-size: clamp(1.65rem, 4vw, 2.35rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 10px; }
+    .hero h1 span { background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--muted); max-width: 620px; margin: 0 auto; font-size: 0.95rem; }
 
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
     }
 
     .tabs {
-      display: inline-flex;
-      gap: 6px;
-      padding: 4px;
-      border-radius: 10px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      margin-bottom: 16px;
+      display: inline-flex; gap: 6px; padding: 4px; border-radius: 10px;
+      background: var(--surface-2); border: 1px solid var(--border); margin-bottom: 16px;
     }
 
     .tab-btn {
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.15s ease;
+      border: 0; background: transparent; color: var(--muted); padding: 8px 14px;
+      border-radius: 8px; font-size: 0.88rem; font-weight: 600; cursor: pointer;
     }
+    .tab-btn.active { background: var(--accent); color: #06101d; }
 
-    .tab-btn.active {
-      background: var(--accent);
-      color: #06101d;
-    }
+    .search-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .input-wrap { flex: 1 1 260px; display: flex; gap: 8px; }
 
-    .search-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    input[type="text"], input[type="number"] {
+      width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--surface-2); color: var(--text); font-size: 0.94rem; outline: none;
     }
-
-    .input-wrap {
-      flex: 1 1 260px;
-      display: flex;
-      gap: 8px;
-    }
-
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--text);
-      font-size: 0.94rem;
-      outline: none;
-      transition: border-color 0.15s ease;
-    }
-
-    input:focus {
-      border-color: var(--accent);
-    }
+    input:focus { border-color: var(--accent); }
 
     .btn-ghost {
-      padding: 0 13px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
+      padding: 0 13px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--surface-2); color: var(--muted); font-size: 0.82rem; font-weight: 600; cursor: pointer;
     }
+    .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
 
-    .btn-ghost:hover {
-      color: var(--text);
-      border-color: var(--accent);
-    }
-
-    .top-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    .top-box input {
-      width: 74px;
-      padding: 11px 10px;
-      text-align: center;
-    }
+    .top-box { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.85rem; }
+    .top-box input { width: 70px; padding: 11px 10px; text-align: center; }
 
     .btn-primary {
-      padding: 12px 20px;
-      border-radius: 10px;
-      border: 0;
+      padding: 12px 20px; border-radius: 10px; border: 0;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #06101d;
-      font-weight: 700;
-      font-size: 0.94rem;
-      cursor: pointer;
-      transition: transform 0.12s ease, opacity 0.15s ease;
+      color: #06101d; font-weight: 700; font-size: 0.94rem; cursor: pointer;
     }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    .btn-primary:hover {
-      opacity: 0.95;
-    }
-
-    .btn-primary:active {
-      transform: scale(0.99);
-    }
-
-    .btn-primary:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .helper {
-      margin-top: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
+    .helper { margin-top: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 0.82rem; color: var(--muted); }
 
     .status-box {
-      margin-top: 20px;
-      padding: 13px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      display: none;
-      font-size: 0.9rem;
+      margin-top: 20px; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--border);
+      background: var(--surface); display: none; font-size: 0.9rem;
     }
+    .status-box.show { display: block; }
+    .status-box.error { border-color: rgba(248, 113, 113, 0.45); color: #fecaca; background: rgba(127, 29, 29, 0.25); }
+    .status-box.ok { border-color: rgba(52, 211, 153, 0.4); color: #a7f3d0; background: rgba(6, 78, 59, 0.22); }
 
-    .status-box.show {
-      display: block;
-    }
+    .results { margin-top: 22px; display: grid; gap: 16px; }
+    .result-head { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+    .thumb { width: 104px; height: 104px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); flex-shrink: 0; }
+    .meta { flex: 1 1 240px; }
+    .meta h2 { font-size: 1.05rem; margin-bottom: 4px; word-break: break-word; }
+    .sub { color: var(--muted); font-size: 0.84rem; margin-bottom: 10px; }
 
-    .status-box.error {
-      border-color: rgba(248, 113, 113, 0.45);
-      color: #fecaca;
-      background: rgba(127, 29, 29, 0.25);
-    }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; }
+    .badge { font-size: 0.75rem; padding: 3px 9px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); }
 
-    .status-box.ok {
-      border-color: rgba(52, 211, 153, 0.4);
-      color: #a7f3d0;
-      background: rgba(6, 78, 59, 0.22);
-    }
-
-    .results {
-      margin-top: 22px;
-      display: grid;
-      gap: 16px;
-    }
-
-    .result-head {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      flex-wrap: wrap;
-    }
-
-    .thumb {
-      width: 108px;
-      height: 108px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      flex-shrink: 0;
-    }
-
-    .meta {
-      flex: 1 1 240px;
-    }
-
-    .meta h2 {
-      font-size: 1.06rem;
-      margin-bottom: 4px;
-      word-break: break-word;
-    }
-
-    .sub {
-      color: var(--muted);
-      font-size: 0.84rem;
-      margin-bottom: 10px;
-    }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .badge {
-      font-size: 0.75rem;
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-
-    .preset-list {
-      margin-top: 14px;
-      display: grid;
-      gap: 10px;
-    }
-
+    .preset-list { margin-top: 14px; display: grid; gap: 10px; }
     .preset-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 14px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); flex-wrap: wrap;
     }
+    .preset-meta { min-width: 0; flex: 1 1 240px; }
+    .preset-url { font-size: 0.86rem; color: var(--accent); word-break: break-all; text-decoration: none; display: block; }
+    .preset-url:hover { text-decoration: underline; }
+    .preset-note { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
 
-    .preset-meta {
-      min-width: 0;
-      flex: 1 1 240px;
-    }
-
-    .preset-url {
-      font-size: 0.86rem;
-      color: var(--accent);
-      word-break: break-all;
-      text-decoration: none;
-      display: block;
-    }
-
-    .preset-url:hover {
-      text-decoration: underline;
-    }
-
-    .preset-note {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 3px;
-    }
-
-    .preset-actions {
-      display: flex;
-      gap: 8px;
-    }
-
+    .preset-actions { display: flex; gap: 8px; }
     .btn-sm {
-      padding: 6px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
+      padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text); font-size: 0.8rem; font-weight: 600; cursor: pointer; text-decoration: none;
     }
+    .btn-sm:hover { border-color: var(--accent); }
 
-    .btn-sm:hover {
-      border-color: var(--accent);
-    }
-
-    .empty {
-      text-align: center;
-      color: var(--muted);
-      padding: 24px 14px;
-      font-size: 0.9rem;
-    }
+    .empty { text-align: center; color: var(--muted); padding: 20px 14px; font-size: 0.88rem; }
 
     footer {
-      border-top: 1px solid var(--border);
-      background: rgba(11, 15, 23, 0.88);
-      padding: 22px 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.86rem;
+      border-top: 1px solid var(--border); background: rgba(11, 15, 23, 0.88);
+      padding: 22px 0; text-align: center; color: var(--muted); font-size: 0.86rem;
     }
-
-    footer .creator {
-      color: var(--text);
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    @media (max-width: 560px) {
-      .btn-primary {
-        width: 100%;
-      }
-    }
+    footer .creator { color: var(--text); font-weight: 600; margin-bottom: 4px; }
   </style>
 </head>
 <body>
@@ -458,12 +184,12 @@
               autocomplete="off"
               required
             />
-            <button type="button" class="btn-ghost" id="pasteBtn" title="Tempel dari clipboard">Tempel</button>
+            <button type="button" class="btn-ghost" id="pasteBtn">Tempel</button>
           </div>
 
           <div class="top-box" id="topBox" style="display: none;">
             <label for="topInput">Top</label>
-            <input id="topInput" type="number" min="1" max="10" value="3" />
+            <input id="topInput" type="number" min="1" max="5" value="3" />
           </div>
 
           <button type="submit" class="btn-primary" id="submitBtn">Cari Preset</button>
@@ -471,7 +197,7 @@
 
         <div class="helper">
           <span>Mendukung tautan TikTok &amp; YouTube serta pencarian kata kunci.</span>
-          <span id="hintTop">Mode kata kunci memindai beberapa video teratas.</span>
+          <span>Top 1–5 video dipindai per pencarian.</span>
         </div>
       </section>
 
@@ -499,7 +225,7 @@
     const statusBox = document.getElementById("statusBox");
     const resultsEl = document.getElementById("results");
 
-    let mode = "url"; // "url" | "keyword"
+    let mode = "url";
 
     function setMode(nextMode) {
       mode = nextMode;
@@ -565,8 +291,8 @@
             if (!item || !item.url) return null;
             return {
               url: item.url,
-              source: item.source || "",
-              detail: item.detail || item.title || ""
+              source: item.diperoleh_dari || item.source || "",
+              detail: item.komentar || item.detail || item.judul || item.title || ""
             };
           })
           .filter(Boolean);
@@ -596,8 +322,9 @@
 
     function renderFindCard(data, titlePrefix = "") {
       const creator = data.nama_creator || data.handle_creator || "Kreator";
-      const title = data.judul_video || data.caption || "Video";
+      const title = data.judul_video || data.caption || data.tautan_video || "Video";
       const entries = extractPresetEntries(data);
+      const platform = (data.sumber || "video").toUpperCase();
 
       return `
         <article class="card">
@@ -605,11 +332,13 @@
             ${data.thumbnail ? `<img class="thumb" src="${escapeHtml(data.thumbnail)}" alt="Thumbnail" loading="lazy" />` : ""}
             <div class="meta">
               <h2>${titlePrefix}${escapeHtml(title)}</h2>
-              <div class="sub">${escapeHtml(creator)} · ${escapeHtml((data.sumber || "video").toUpperCase())}</div>
+              <div class="sub">${escapeHtml(creator)} · ${escapeHtml(platform)}</div>
               <div class="badges">
+                <span class="badge">${platform}</span>
                 <span class="badge">${entries.length} Preset</span>
                 ${data.views != null ? `<span class="badge">${escapeHtml(data.views)} Views</span>` : ""}
                 ${data.like != null ? `<span class="badge">${escapeHtml(data.like)} Likes</span>` : ""}
+                ${data.tautan_video ? `<a class="badge" href="${escapeHtml(data.tautan_video)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">Link Video</a>` : ""}
               </div>
             </div>
           </div>
@@ -627,27 +356,24 @@
 
     function renderSearchResult(payload) {
       const scanned = Array.isArray(payload.semua_hasil_dipindai) ? payload.semua_hasil_dipindai : [];
-      const foundCards = scanned
-        .filter((entry) => entry && entry.data)
-        .map((entry, idx) => renderFindCard(entry.data, `Video #${idx + 1}: `));
-
-      if (!foundCards.length) {
-        const items = Array.isArray(payload.hasil_pencarian) ? payload.hasil_pencarian : [];
-        if (!items.length) {
-          resultsEl.innerHTML = `<div class="card empty">Tidak ada hasil ditemukan untuk kata kunci tersebut.</div>`;
-          return;
+      const cards = scanned.map((entry, idx) => {
+        if (entry && entry.data) {
+          return renderFindCard(entry.data, `#${idx + 1} `);
         }
-        resultsEl.innerHTML = items.map((it, idx) => `
+        return `
           <article class="card">
-            <h2>#${idx + 1} ${escapeHtml(it.snippet_caption || "Video")}</h2>
-            <div class="sub">${escapeHtml(it.handle || "")}</div>
-            <a class="preset-url" href="${escapeHtml(it.url_video)}" target="_blank" rel="noopener noreferrer">${escapeHtml(it.url_video)}</a>
+            <h2>#${idx + 1} ${escapeHtml(entry?.url || "Video")}</h2>
+            <div class="empty">${escapeHtml(entry?.error || "Gagal memindai video ini.")}</div>
           </article>
-        `).join("");
+        `;
+      });
+
+      if (!cards.length) {
+        resultsEl.innerHTML = `<div class="card empty">Tidak ada hasil ditemukan untuk kata kunci tersebut.</div>`;
         return;
       }
 
-      resultsEl.innerHTML = foundCards.join("");
+      resultsEl.innerHTML = cards.join("");
     }
 
     resultsEl.addEventListener("click", (e) => {
@@ -678,14 +404,17 @@
           );
           resultsEl.innerHTML = renderFindCard(json);
         } else {
-          const top = Math.max(1, Math.min(10, parseInt(topInput.value, 10) || 3));
+          const top = Math.max(1, Math.min(5, parseInt(topInput.value, 10) || 3));
           setStatus("", `Mencari kata kunci "${val}" (top ${top})...`);
           const res = await fetch(`/api/search?q=${encodeURIComponent(val)}&top=${top}`);
           const json = await res.json();
           if (!res.ok || json.error) {
             throw new Error(json.error || json.message || `HTTP ${res.status}`);
           }
-          setStatus("ok", `Pencarian selesai. Total preset terkumpul: ${json.total_link_preset ?? 0}`);
+          setStatus(
+            "ok",
+            `Ditemukan ${json.total_hasil ?? 0} video kandidat · Dipindai ${json.semua_hasil_dipindai?.length ?? 0} video · Total preset: ${json.total_link_preset ?? 0}`
+          );
           renderSearchResult(json);
         }
       } catch (err) {
