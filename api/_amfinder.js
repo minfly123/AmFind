@@ -9,9 +9,10 @@ const UA =
 
 const CHALLENGE_KEYS = ["/api/v/2b51359f"];
 const HANDSHAKE_TIMEOUT = 15000;
-const SSE_MAX_MS = 120000;
+const SSE_MAX_MS = 90000;
 const HTTP_RETRY_MAX = 2;
 const RETRY_RE = /coba lagi|try again|429|terlalu banyak|too many|timed out|timeout|server|sebentar/i;
+const YT_RE = /youtu\.be|youtube\.com/i;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const clampN = (v) => Math.max(1, Math.min(10000, Math.floor(Number(v) || 1)));
@@ -108,7 +109,12 @@ async function discoverChallenges() {
       chunks.map(async (f) => {
         try {
           const url = f.startsWith("http") ? f : BASE + (f.startsWith("/") ? f : "/" + f);
-          const r = await axios({ url, timeout: 10000, headers: { "User-Agent": UA }, validateStatus: () => true });
+          const r = await axios({
+            url,
+            timeout: 10000,
+            headers: { "User-Agent": UA },
+            validateStatus: () => true,
+          });
           if (typeof r.data === "string") {
             (r.data.match(/\/api\/v\/[0-9a-f]{8}/g) || []).forEach((c) => found.add(c));
           }
@@ -132,9 +138,9 @@ async function getHandshakeToken() {
         lastErr = e;
         if (e.status === 403) {
           did = makeDeviceId();
-          await sleep(1500);
+          await sleep(1200);
         } else if (e.status === 429) {
-          await sleep(2500);
+          await sleep(2000);
         } else if (pass === 0 && list.length === CHALLENGE_KEYS.length) {
           list = await discoverChallenges();
           if (!list.length) list = CHALLENGE_KEYS.slice();
@@ -244,12 +250,29 @@ function sseRun(ssePath) {
 }
 
 function detectSource(videoUrl) {
-  return /youtu\.be|youtube\.com/i.test(videoUrl || "") ? "youtube" : "tiktok";
+  return YT_RE.test(videoUrl || "") ? "youtube" : "tiktok";
 }
 
 function hashtagsOf(text) {
   const matches = String(text || "").match(/#[\p{L}\p{N}_]+/gu) || [];
   return [...new Set(matches)];
+}
+
+function fmtLink(l, idx) {
+  return {
+    no: idx + 1,
+    tipe: l.type || null,
+    judul: l.title || null,
+    url: l.url,
+    ukuran_file: l.size || null,
+    rasio: l.ratio || null,
+    thumbnail: l.thumb || null,
+    diperoleh_dari: l.source || null,
+    komentar: l.detail || null,
+    dari_creator_video: l.byAuthor === true,
+    disematkan: l.pinned === true,
+    terverifikasi: l.verified === true,
+  };
 }
 
 function mapFindResult(r, inputUrl = "") {
@@ -279,7 +302,7 @@ function mapFindResult(r, inputUrl = "") {
     hastag: hashtagsOf(v.description || ""),
     thumbnail: v.cover || null,
     link_preset: links.map((l) => l.url).filter(Boolean),
-    preset: links,
+    preset: links.map(fmtLink),
     pesan: links.length === 0 ? noDataMsg : null,
   };
 }
@@ -314,7 +337,7 @@ async function runFind(inputUrl) {
     } catch (e) {
       lastErr = e;
       if (retryableMsg(e.message) && attempt < HTTP_RETRY_MAX) {
-        await sleep(1500);
+        await sleep(1200);
         continue;
       }
       break;
@@ -323,8 +346,7 @@ async function runFind(inputUrl) {
   throw lastErr || new Error("pemindaian gagal");
 }
 
-async function runSearch(keyword, top = 5) {
-  let lastErr = null;
+async function runSearch(keyword, top = 3) {
   let searchData = null;
 
   for (let attempt = 1; attempt <= HTTP_RETRY_MAX; attempt++) {
@@ -334,12 +356,12 @@ async function runSearch(keyword, top = 5) {
       if (got.error) throw new Error(got.error.message);
       searchData = {
         items: got.candidates?.items || [],
+        meta: got.result || null,
       };
       break;
     } catch (e) {
-      lastErr = e;
       if (retryableMsg(e.message) && attempt < HTTP_RETRY_MAX) {
-        await sleep(1500);
+        await sleep(1200);
         continue;
       }
       throw e;
@@ -347,16 +369,19 @@ async function runSearch(keyword, top = 5) {
   }
 
   const items = searchData?.items || [];
-  const limit = Math.max(1, Math.min(10, Number(top) || 5));
+  const limit = Math.max(1, Math.min(5, Number(top) || 3));
   const targets = items.slice(0, limit);
   const scanned = [];
 
-  for (const it of targets) {
+  for (let i = 0; i < targets.length; i++) {
+    const it = targets[i];
+    if (!it || !it.url) continue;
+    if (i > 0) await sleep(600);
     try {
       const data = await runFind(it.url);
-      scanned.push({ url: it.url, data });
+      scanned.push({ no: i + 1, url: it.url, data });
     } catch (e) {
-      scanned.push({ url: it.url, error: e.message || String(e) });
+      scanned.push({ no: i + 1, url: it.url, error: e.message || String(e) });
     }
   }
 
