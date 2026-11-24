@@ -15,7 +15,6 @@
       --accent: #38bdf8;
       --accent-2: #818cf8;
       --success: #34d399;
-      --warn: #fbbf24;
       --danger: #f87171;
       --radius: 14px;
     }
@@ -48,7 +47,7 @@
 
     header {
       border-bottom: 1px solid var(--border);
-      background: rgba(11, 15, 23, 0.75);
+      background: rgba(11, 15, 23, 0.78);
       backdrop-filter: blur(10px);
       position: sticky;
       top: 0;
@@ -60,6 +59,7 @@
       align-items: center;
       justify-content: space-between;
       height: 64px;
+      gap: 12px;
     }
 
     .brand {
@@ -90,20 +90,21 @@
       padding: 4px 10px;
       border-radius: 999px;
       background: var(--surface);
+      white-space: nowrap;
     }
 
     main {
       flex: 1;
-      padding: 40px 0 56px;
+      padding: 36px 0 56px;
     }
 
     .hero {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
     .hero h1 {
-      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-size: clamp(1.65rem, 4vw, 2.35rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       margin-bottom: 10px;
@@ -117,9 +118,9 @@
 
     .hero p {
       color: var(--muted);
-      max-width: 600px;
+      max-width: 620px;
       margin: 0 auto;
-      font-size: 0.96rem;
+      font-size: 0.95rem;
     }
 
     .card {
@@ -164,8 +165,9 @@
     }
 
     .input-wrap {
-      flex: 1 1 280px;
-      position: relative;
+      flex: 1 1 260px;
+      display: flex;
+      gap: 8px;
     }
 
     input[type="text"],
@@ -176,12 +178,29 @@
       border: 1px solid var(--border);
       background: var(--surface-2);
       color: var(--text);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       outline: none;
       transition: border-color 0.15s ease;
     }
 
     input:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-ghost {
+      padding: 0 13px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
       border-color: var(--accent);
     }
 
@@ -194,7 +213,7 @@
     }
 
     .top-box input {
-      width: 78px;
+      width: 74px;
       padding: 11px 10px;
       text-align: center;
     }
@@ -235,38 +254,9 @@
       color: var(--muted);
     }
 
-    .link-btn {
-      background: none;
-      border: 0;
-      color: var(--accent);
-      cursor: pointer;
-      font-size: 0.82rem;
-      text-decoration: underline;
-    }
-
-    .api-config {
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px dashed var(--border);
-      display: none;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .api-config.open {
-      display: flex;
-    }
-
-    .api-config input {
-      flex: 1 1 260px;
-      padding: 9px 12px;
-      font-size: 0.85rem;
-    }
-
     .status-box {
       margin-top: 20px;
-      padding: 14px 16px;
+      padding: 13px 16px;
       border-radius: 12px;
       border: 1px solid var(--border);
       background: var(--surface);
@@ -279,13 +269,13 @@
     }
 
     .status-box.error {
-      border-color: rgba(248, 113, 113, 0.4);
+      border-color: rgba(248, 113, 113, 0.45);
       color: #fecaca;
       background: rgba(127, 29, 29, 0.25);
     }
 
     .status-box.ok {
-      border-color: rgba(52, 211, 153, 0.35);
+      border-color: rgba(52, 211, 153, 0.4);
       color: #a7f3d0;
       background: rgba(6, 78, 59, 0.22);
     }
@@ -304,8 +294,8 @@
     }
 
     .thumb {
-      width: 112px;
-      height: 112px;
+      width: 108px;
+      height: 108px;
       object-fit: cover;
       border-radius: 10px;
       border: 1px solid var(--border);
@@ -318,13 +308,14 @@
     }
 
     .meta h2 {
-      font-size: 1.08rem;
+      font-size: 1.06rem;
       margin-bottom: 4px;
+      word-break: break-word;
     }
 
     .sub {
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       margin-bottom: 10px;
     }
 
@@ -335,7 +326,7 @@
     }
 
     .badge {
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       padding: 3px 9px;
       border-radius: 999px;
       background: var(--surface-2);
@@ -361,15 +352,27 @@
       flex-wrap: wrap;
     }
 
+    .preset-meta {
+      min-width: 0;
+      flex: 1 1 240px;
+    }
+
     .preset-url {
       font-size: 0.86rem;
       color: var(--accent);
       word-break: break-all;
       text-decoration: none;
+      display: block;
     }
 
     .preset-url:hover {
       text-decoration: underline;
+    }
+
+    .preset-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 3px;
     }
 
     .preset-actions {
@@ -396,13 +399,13 @@
     .empty {
       text-align: center;
       color: var(--muted);
-      padding: 28px 16px;
-      font-size: 0.92rem;
+      padding: 24px 14px;
+      font-size: 0.9rem;
     }
 
     footer {
       border-top: 1px solid var(--border);
-      background: rgba(11, 15, 23, 0.85);
+      background: rgba(11, 15, 23, 0.88);
       padding: 22px 0;
       text-align: center;
       color: var(--muted);
@@ -437,7 +440,7 @@
     <div class="container">
       <section class="hero">
         <h1>Cari Preset Alight Motion di <span>AmFind</span></h1>
-        <p>Masukkan tautan video TikTok atau YouTube, atau cari berdasarkan kata kunci untuk menemukan tautan preset dari deskripsi, bio, maupun komentar.</p>
+        <p>Masukkan link video TikTok atau YouTube, atau cari pakai kata kunci untuk menemukan link preset dari deskripsi, bio, maupun komentar.</p>
       </section>
 
       <section class="card">
@@ -455,29 +458,20 @@
               autocomplete="off"
               required
             />
+            <button type="button" class="btn-ghost" id="pasteBtn" title="Tempel dari clipboard">Tempel</button>
           </div>
 
           <div class="top-box" id="topBox" style="display: none;">
             <label for="topInput">Top</label>
-            <input id="topInput" type="number" min="1" max="20" value="5" />
+            <input id="topInput" type="number" min="1" max="10" value="3" />
           </div>
 
           <button type="submit" class="btn-primary" id="submitBtn">Cari Preset</button>
         </form>
 
         <div class="helper">
-          <span>Mendukung URL TikTok &amp; YouTube serta pencarian kata kunci.</span>
-          <button type="button" class="link-btn" id="toggleApi">Pengaturan Endpoint API</button>
-        </div>
-
-        <div class="api-config" id="apiConfig">
-          <label for="apiBaseInput" style="font-size: 0.82rem; color: var(--muted);">Base API:</label>
-          <input
-            id="apiBaseInput"
-            type="text"
-            value=""
-            placeholder="Kosongkan untuk pakai origin saat ini (misal /api/find & /api/search)"
-          />
+          <span>Mendukung tautan TikTok &amp; YouTube serta pencarian kata kunci.</span>
+          <span id="hintTop">Mode kata kunci memindai beberapa video teratas.</span>
         </div>
       </section>
 
@@ -498,14 +492,12 @@
     const tabKeyword = document.getElementById("tabKeyword");
     const searchForm = document.getElementById("searchForm");
     const queryInput = document.getElementById("queryInput");
+    const pasteBtn = document.getElementById("pasteBtn");
     const topBox = document.getElementById("topBox");
     const topInput = document.getElementById("topInput");
     const submitBtn = document.getElementById("submitBtn");
     const statusBox = document.getElementById("statusBox");
     const resultsEl = document.getElementById("results");
-    const toggleApi = document.getElementById("toggleApi");
-    const apiConfig = document.getElementById("apiConfig");
-    const apiBaseInput = document.getElementById("apiBaseInput");
 
     let mode = "url"; // "url" | "keyword"
 
@@ -526,7 +518,18 @@
 
     tabUrl.addEventListener("click", () => setMode("url"));
     tabKeyword.addEventListener("click", () => setMode("keyword"));
-    toggleApi.addEventListener("click", () => apiConfig.classList.toggle("open"));
+
+    pasteBtn.addEventListener("click", async () => {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          queryInput.value = text.trim();
+          queryInput.focus();
+        }
+      } catch (_) {
+        queryInput.focus();
+      }
+    });
 
     function setStatus(type, message) {
       statusBox.className = "status-box show" + (type ? " " + type : "");
@@ -536,10 +539,6 @@
     function clearStatus() {
       statusBox.className = "status-box";
       statusBox.textContent = "";
-    }
-
-    function getApiBase() {
-      return apiBaseInput.value.trim().replace(/\/+$/, "");
     }
 
     function escapeHtml(str) {
@@ -558,11 +557,35 @@
       }).catch(() => {});
     }
 
-    function renderPresetItem(url, idx) {
-      const safeUrl = escapeHtml(url);
+    function extractPresetEntries(data) {
+      if (Array.isArray(data.preset) && data.preset.length) {
+        return data.preset
+          .map((item) => {
+            if (typeof item === "string") return { url: item, source: "", detail: "" };
+            if (!item || !item.url) return null;
+            return {
+              url: item.url,
+              source: item.source || "",
+              detail: item.detail || item.title || ""
+            };
+          })
+          .filter(Boolean);
+      }
+      if (Array.isArray(data.link_preset) && data.link_preset.length) {
+        return data.link_preset.map((url) => ({ url, source: "", detail: "" }));
+      }
+      return [];
+    }
+
+    function renderPresetItem(entry, idx) {
+      const safeUrl = escapeHtml(entry.url);
+      const noteParts = [entry.source, entry.detail].filter(Boolean).join(" · ");
       return `
         <div class="preset-item">
-          <a class="preset-url" href="${safeUrl}" target="_blank" rel="noopener noreferrer">#${idx + 1} ${safeUrl}</a>
+          <div class="preset-meta">
+            <a class="preset-url" href="${safeUrl}" target="_blank" rel="noopener noreferrer">#${idx + 1} ${safeUrl}</a>
+            ${noteParts ? `<div class="preset-note">${escapeHtml(noteParts)}</div>` : ""}
+          </div>
           <div class="preset-actions">
             <button type="button" class="btn-sm" data-copy="${safeUrl}">Salin</button>
             <a class="btn-sm" href="${safeUrl}" target="_blank" rel="noopener noreferrer">Buka</a>
@@ -574,9 +597,7 @@
     function renderFindCard(data, titlePrefix = "") {
       const creator = data.nama_creator || data.handle_creator || "Kreator";
       const title = data.judul_video || data.caption || "Video";
-      const links = Array.isArray(data.link_preset) && data.link_preset.length
-        ? data.link_preset
-        : (Array.isArray(data.preset) ? data.preset.map((p) => p.url).filter(Boolean) : []);
+      const entries = extractPresetEntries(data);
 
       return `
         <article class="card">
@@ -586,7 +607,7 @@
               <h2>${titlePrefix}${escapeHtml(title)}</h2>
               <div class="sub">${escapeHtml(creator)} · ${escapeHtml((data.sumber || "video").toUpperCase())}</div>
               <div class="badges">
-                <span class="badge">${links.length} Preset</span>
+                <span class="badge">${entries.length} Preset</span>
                 ${data.views != null ? `<span class="badge">${escapeHtml(data.views)} Views</span>` : ""}
                 ${data.like != null ? `<span class="badge">${escapeHtml(data.like)} Likes</span>` : ""}
               </div>
@@ -595,8 +616,8 @@
 
           <div class="preset-list">
             ${
-              links.length
-                ? links.map((u, i) => renderPresetItem(u, i)).join("")
+              entries.length
+                ? entries.map((item, i) => renderPresetItem(item, i)).join("")
                 : `<div class="empty">${escapeHtml(data.pesan || "Tidak ada link preset ditemukan pada video ini.")}</div>`
             }
           </div>
@@ -641,28 +662,25 @@
 
       submitBtn.disabled = true;
       resultsEl.innerHTML = "";
-      const base = getApiBase();
 
       try {
         if (mode === "url") {
           setStatus("", "Memindai tautan video...");
-          const endpoint = `${base}/api/find?url=${encodeURIComponent(val)}`;
-          const res = await fetch(endpoint);
+          const res = await fetch(`/api/find?url=${encodeURIComponent(val)}`);
           const json = await res.json();
           if (!res.ok || json.error) {
             throw new Error(json.error || json.message || `HTTP ${res.status}`);
           }
-          const links = Array.isArray(json.link_preset) ? json.link_preset : [];
+          const count = extractPresetEntries(json).length;
           setStatus(
-            links.length ? "ok" : "",
-            links.length ? `Ditemukan ${links.length} tautan preset.` : (json.pesan || "Selesai dipindai.")
+            count ? "ok" : "",
+            count ? `Ditemukan ${count} tautan preset.` : (json.pesan || "Selesai dipindai.")
           );
           resultsEl.innerHTML = renderFindCard(json);
         } else {
-          const top = Math.max(1, Math.min(20, parseInt(topInput.value, 10) || 5));
+          const top = Math.max(1, Math.min(10, parseInt(topInput.value, 10) || 3));
           setStatus("", `Mencari kata kunci "${val}" (top ${top})...`);
-          const endpoint = `${base}/api/search?q=${encodeURIComponent(val)}&top=${top}`;
-          const res = await fetch(endpoint);
+          const res = await fetch(`/api/search?q=${encodeURIComponent(val)}&top=${top}`);
           const json = await res.json();
           if (!res.ok || json.error) {
             throw new Error(json.error || json.message || `HTTP ${res.status}`);
@@ -672,10 +690,7 @@
         }
       } catch (err) {
         clearStatus();
-        setStatus(
-          "error",
-          `Gagal mengambil data: ${err.message}. Pastikan endpoint /api/find atau /api/search tersedia di deployment Vercel kamu.`
-        );
+        setStatus("error", `Gagal mengambil data: ${err.message}`);
       } finally {
         submitBtn.disabled = false;
       }
