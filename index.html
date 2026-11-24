@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AmFind — Alight Motion Preset Finder</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --surface: #121826;
+      --surface-2: #182032;
+      --border: rgba(148, 163, 184, 0.16);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #818cf8;
+      --success: #34d399;
+      --warn: #fbbf24;
+      --danger: #f87171;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.12), transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(129, 140, 248, 0.12), transparent 42%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.55;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 15, 23, 0.75);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #06101d;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .pill {
+      font-size: 0.78rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--surface);
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 0 56px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 0.96rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    .tabs {
+      display: inline-flex;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #06101d;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .input-wrap {
+      flex: 1 1 280px;
+      position: relative;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+    }
+
+    .top-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .top-box input {
+      width: 78px;
+      padding: 11px 10px;
+      text-align: center;
+    }
+
+    .btn-primary {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: 0;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #06101d;
+      font-weight: 700;
+      font-size: 0.94rem;
+      cursor: pointer;
+      transition: transform 0.12s ease, opacity 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.95;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.99);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .helper {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .link-btn {
+      background: none;
+      border: 0;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.82rem;
+      text-decoration: underline;
+    }
+
+    .api-config {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
+      display: none;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .api-config.open {
+      display: flex;
+    }
+
+    .api-config input {
+      flex: 1 1 260px;
+      padding: 9px 12px;
+      font-size: 0.85rem;
+    }
+
+    .status-box {
+      margin-top: 20px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: none;
+      font-size: 0.9rem;
+    }
+
+    .status-box.show {
+      display: block;
+    }
+
+    .status-box.error {
+      border-color: rgba(248, 113, 113, 0.4);
+      color: #fecaca;
+      background: rgba(127, 29, 29, 0.25);
+    }
+
+    .status-box.ok {
+      border-color: rgba(52, 211, 153, 0.35);
+      color: #a7f3d0;
+      background: rgba(6, 78, 59, 0.22);
+    }
+
+    .results {
+      margin-top: 22px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .result-head {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .thumb {
+      width: 112px;
+      height: 112px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      flex-shrink: 0;
+    }
+
+    .meta {
+      flex: 1 1 240px;
+    }
+
+    .meta h2 {
+      font-size: 1.08rem;
+      margin-bottom: 4px;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .badge {
+      font-size: 0.76rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .preset-list {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .preset-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .preset-url {
+      font-size: 0.86rem;
+      color: var(--accent);
+      word-break: break-all;
+      text-decoration: none;
+    }
+
+    .preset-url:hover {
+      text-decoration: underline;
+    }
+
+    .preset-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-sm:hover {
+      border-color: var(--accent);
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 28px 16px;
+      font-size: 0.92rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: rgba(11, 15, 23, 0.85);
+      padding: 22px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    footer .creator {
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 560px) {
+      .btn-primary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-badge">AF</span>
+        <span>AmFind</span>
+      </div>
+      <span class="pill">TikTok &amp; YouTube Preset Finder</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero">
+        <h1>Cari Preset Alight Motion di <span>AmFind</span></h1>
+        <p>Masukkan tautan video TikTok atau YouTube, atau cari berdasarkan kata kunci untuk menemukan tautan preset dari deskripsi, bio, maupun komentar.</p>
+      </section>
+
+      <section class="card">
+        <div class="tabs" role="tablist" aria-label="Mode pencarian">
+          <button type="button" class="tab-btn active" id="tabUrl" role="tab" aria-selected="true">Link Video</button>
+          <button type="button" class="tab-btn" id="tabKeyword" role="tab" aria-selected="false">Kata Kunci</button>
+        </div>
+
+        <form id="searchForm" class="search-row">
+          <div class="input-wrap">
+            <input
+              id="queryInput"
+              type="text"
+              placeholder="Tempel link TikTok / YouTube (contoh: https://vt.tiktok.com/...)"
+              autocomplete="off"
+              required
+            />
+          </div>
+
+          <div class="top-box" id="topBox" style="display: none;">
+            <label for="topInput">Top</label>
+            <input id="topInput" type="number" min="1" max="20" value="5" />
+          </div>
+
+          <button type="submit" class="btn-primary" id="submitBtn">Cari Preset</button>
+        </form>
+
+        <div class="helper">
+          <span>Mendukung URL TikTok &amp; YouTube serta pencarian kata kunci.</span>
+          <button type="button" class="link-btn" id="toggleApi">Pengaturan Endpoint API</button>
+        </div>
+
+        <div class="api-config" id="apiConfig">
+          <label for="apiBaseInput" style="font-size: 0.82rem; color: var(--muted);">Base API:</label>
+          <input
+            id="apiBaseInput"
+            type="text"
+            value=""
+            placeholder="Kosongkan untuk pakai origin saat ini (misal /api/find & /api/search)"
+          />
+        </div>
+      </section>
+
+      <div class="status-box" id="statusBox" role="status" aria-live="polite"></div>
+      <section class="results" id="results"></section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="creator">Created by PiiZx</p>
+      <p>© 2026 AmFind. Hak cipta dilindungi.</p>
+    </div>
+  </footer>
+
+  <script>
+    const tabUrl = document.getElementById("tabUrl");
+    const tabKeyword = document.getElementById("tabKeyword");
+    const searchForm = document.getElementById("searchForm");
+    const queryInput = document.getElementById("queryInput");
+    const topBox = document.getElementById("topBox");
+    const topInput = document.getElementById("topInput");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusBox = document.getElementById("statusBox");
+    const resultsEl = document.getElementById("results");
+    const toggleApi = document.getElementById("toggleApi");
+    const apiConfig = document.getElementById("apiConfig");
+    const apiBaseInput = document.getElementById("apiBaseInput");
+
+    let mode = "url"; // "url" | "keyword"
+
+    function setMode(nextMode) {
+      mode = nextMode;
+      const isUrl = mode === "url";
+      tabUrl.classList.toggle("active", isUrl);
+      tabKeyword.classList.toggle("active", !isUrl);
+      tabUrl.setAttribute("aria-selected", String(isUrl));
+      tabKeyword.setAttribute("aria-selected", String(!isUrl));
+      topBox.style.display = isUrl ? "none" : "flex";
+      queryInput.placeholder = isUrl
+        ? "Tempel link TikTok / YouTube (contoh: https://vt.tiktok.com/...)"
+        : "Masukkan kata kunci preset atau judul lagu...";
+      queryInput.value = "";
+      queryInput.focus();
+    }
+
+    tabUrl.addEventListener("click", () => setMode("url"));
+    tabKeyword.addEventListener("click", () => setMode("keyword"));
+    toggleApi.addEventListener("click", () => apiConfig.classList.toggle("open"));
+
+    function setStatus(type, message) {
+      statusBox.className = "status-box show" + (type ? " " + type : "");
+      statusBox.textContent = message;
+    }
+
+    function clearStatus() {
+      statusBox.className = "status-box";
+      statusBox.textContent = "";
+    }
+
+    function getApiBase() {
+      return apiBaseInput.value.trim().replace(/\/+$/, "");
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function copyText(text, btn) {
+      navigator.clipboard?.writeText(text).then(() => {
+        const prev = btn.textContent;
+        btn.textContent = "Tersalin";
+        setTimeout(() => (btn.textContent = prev), 1400);
+      }).catch(() => {});
+    }
+
+    function renderPresetItem(url, idx) {
+      const safeUrl = escapeHtml(url);
+      return `
+        <div class="preset-item">
+          <a class="preset-url" href="${safeUrl}" target="_blank" rel="noopener noreferrer">#${idx + 1} ${safeUrl}</a>
+          <div class="preset-actions">
+            <button type="button" class="btn-sm" data-copy="${safeUrl}">Salin</button>
+            <a class="btn-sm" href="${safeUrl}" target="_blank" rel="noopener noreferrer">Buka</a>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFindCard(data, titlePrefix = "") {
+      const creator = data.nama_creator || data.handle_creator || "Kreator";
+      const title = data.judul_video || data.caption || "Video";
+      const links = Array.isArray(data.link_preset) && data.link_preset.length
+        ? data.link_preset
+        : (Array.isArray(data.preset) ? data.preset.map((p) => p.url).filter(Boolean) : []);
+
+      return `
+        <article class="card">
+          <div class="result-head">
+            ${data.thumbnail ? `<img class="thumb" src="${escapeHtml(data.thumbnail)}" alt="Thumbnail" loading="lazy" />` : ""}
+            <div class="meta">
+              <h2>${titlePrefix}${escapeHtml(title)}</h2>
+              <div class="sub">${escapeHtml(creator)} · ${escapeHtml((data.sumber || "video").toUpperCase())}</div>
+              <div class="badges">
+                <span class="badge">${links.length} Preset</span>
+                ${data.views != null ? `<span class="badge">${escapeHtml(data.views)} Views</span>` : ""}
+                ${data.like != null ? `<span class="badge">${escapeHtml(data.like)} Likes</span>` : ""}
+              </div>
+            </div>
+          </div>
+
+          <div class="preset-list">
+            ${
+              links.length
+                ? links.map((u, i) => renderPresetItem(u, i)).join("")
+                : `<div class="empty">${escapeHtml(data.pesan || "Tidak ada link preset ditemukan pada video ini.")}</div>`
+            }
+          </div>
+        </article>
+      `;
+    }
+
+    function renderSearchResult(payload) {
+      const scanned = Array.isArray(payload.semua_hasil_dipindai) ? payload.semua_hasil_dipindai : [];
+      const foundCards = scanned
+        .filter((entry) => entry && entry.data)
+        .map((entry, idx) => renderFindCard(entry.data, `Video #${idx + 1}: `));
+
+      if (!foundCards.length) {
+        const items = Array.isArray(payload.hasil_pencarian) ? payload.hasil_pencarian : [];
+        if (!items.length) {
+          resultsEl.innerHTML = `<div class="card empty">Tidak ada hasil ditemukan untuk kata kunci tersebut.</div>`;
+          return;
+        }
+        resultsEl.innerHTML = items.map((it, idx) => `
+          <article class="card">
+            <h2>#${idx + 1} ${escapeHtml(it.snippet_caption || "Video")}</h2>
+            <div class="sub">${escapeHtml(it.handle || "")}</div>
+            <a class="preset-url" href="${escapeHtml(it.url_video)}" target="_blank" rel="noopener noreferrer">${escapeHtml(it.url_video)}</a>
+          </article>
+        `).join("");
+        return;
+      }
+
+      resultsEl.innerHTML = foundCards.join("");
+    }
+
+    resultsEl.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-copy]");
+      if (btn) copyText(btn.getAttribute("data-copy"), btn);
+    });
+
+    searchForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const val = queryInput.value.trim();
+      if (!val) return;
+
+      submitBtn.disabled = true;
+      resultsEl.innerHTML = "";
+      const base = getApiBase();
+
+      try {
+        if (mode === "url") {
+          setStatus("", "Memindai tautan video...");
+          const endpoint = `${base}/api/find?url=${encodeURIComponent(val)}`;
+          const res = await fetch(endpoint);
+          const json = await res.json();
+          if (!res.ok || json.error) {
+            throw new Error(json.error || json.message || `HTTP ${res.status}`);
+          }
+          const links = Array.isArray(json.link_preset) ? json.link_preset : [];
+          setStatus(
+            links.length ? "ok" : "",
+            links.length ? `Ditemukan ${links.length} tautan preset.` : (json.pesan || "Selesai dipindai.")
+          );
+          resultsEl.innerHTML = renderFindCard(json);
+        } else {
+          const top = Math.max(1, Math.min(20, parseInt(topInput.value, 10) || 5));
+          setStatus("", `Mencari kata kunci "${val}" (top ${top})...`);
+          const endpoint = `${base}/api/search?q=${encodeURIComponent(val)}&top=${top}`;
+          const res = await fetch(endpoint);
+          const json = await res.json();
+          if (!res.ok || json.error) {
+            throw new Error(json.error || json.message || `HTTP ${res.status}`);
+          }
+          setStatus("ok", `Pencarian selesai. Total preset terkumpul: ${json.total_link_preset ?? 0}`);
+          renderSearchResult(json);
+        }
+      } catch (err) {
+        clearStatus();
+        setStatus(
+          "error",
+          `Gagal mengambil data: ${err.message}. Pastikan endpoint /api/find atau /api/search tersedia di deployment Vercel kamu.`
+        );
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
